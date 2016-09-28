@@ -1,9 +1,12 @@
 # Python3-Wine
 
-This scripts builds a Wine prefix with preinstalled Python 3, currently with
-this:
+This is a docker container to help building Python applications in Wine. It
+installs Python, PyInstaller and some extensions to be abel to build "native"
+Windows applications.
 
- * Python 3.4.4
+This is currently installed:
+
+ * Python 3.5.2
  * pbr
- * PyInstaller 3.1.1
+ * PyInstaller
  * LXML binary wheel
