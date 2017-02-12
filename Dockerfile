@@ -39,10 +39,8 @@ RUN cd && \
   rm python-${PYVER}.exe
 
 # Install some python software
-COPY *.whl /tmp
 RUN xvfb-run sh -c "\
   wine py -m pip install -v --upgrade pip setuptools && \
   wine py -m pip install -v pbr pyinstaller && \
-  wine py -m pip install -v /tmp/*.whl && \
   wineserver -w"
 

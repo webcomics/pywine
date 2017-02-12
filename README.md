@@ -9,4 +9,3 @@ This is currently installed:
  * Python 3.5.2
  * pbr
  * PyInstaller
- * LXML binary wheel
