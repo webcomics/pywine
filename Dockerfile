@@ -28,7 +28,7 @@ RUN xvfb-run sh -c "\
   wineserver -w"
 
 # Install Python
-ENV PYVER 3.5.2
+ENV PYVER 3.5.3
 COPY SHA256SUMS.txt /tmp
 RUN cd && \
   curl -O https://www.python.org/ftp/python/${PYVER}/python-${PYVER}.exe && \
