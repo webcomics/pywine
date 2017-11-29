@@ -12,6 +12,6 @@ Windows applications.
 
 This is currently installed:
 
- * Python 3.5.3
+ * Python 3.6.3
  * pbr
  * PyInstaller
