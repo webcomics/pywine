@@ -26,13 +26,14 @@ RUN cd && \
   curl -O https://www.python.org/ftp/python/${PYVER}/python-${PYVER}.exe && \
   sha256sum -c /tmp/SHA256SUMS.txt && \
   xvfb-run sh -c "\
-    wine python-${PYVER}.exe /quiet TargetDir=C:\\Python36-32 Include_doc=0 InstallAllUsers=1 && \
+    wine python-${PYVER}.exe /quiet TargetDir=C:\\Python36-32 \
+      Include_doc=0 InstallAllUsers=1 PrependPath=1 && \
     wineserver -w" && \
   rm python-${PYVER}.exe
 
 # Install some python software
 RUN xvfb-run sh -c "\
-  wine py -m pip install -v --upgrade pip setuptools && \
-  wine py -m pip install -v pbr pyinstaller && \
+  wine pip install --upgrade pip setuptools && \
+  wine pip install pbr pyinstaller && \
   wineserver -w"
 
