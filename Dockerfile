@@ -13,28 +13,20 @@ LABEL \
 
 ENV WINEDEBUG -all
 ENV WINEARCH win32
-ENV WINEDLLOVERRIDES winemenubuilder.exe,mscoree,mshtml=
 
-# Prepare environment:
-# - Set Windows version to Windows 7
-# - Disable menu updates
-# - Disable Mono
-# - Disable Gecko
-RUN xvfb-run sh -c "\
-  wine reg add 'HKLM\Software\Microsoft\Windows NT\CurrentVersion' /v CurrentVersion /d 6.1 /f && \
-  wine reg add 'HKCU\Software\Wine\DllOverrides' /v winemenubuilder.exe /t REG_SZ /d '' /f && \
-  wine reg add 'HKCU\Software\Wine\DllOverrides' /v mscoree /t REG_SZ /d '' /f && \
-  wine reg add 'HKCU\Software\Wine\DllOverrides' /v mshtml /t REG_SZ /d '' /f && \
-  wineserver -w"
+COPY wine-init.sh SHA256SUMS.txt /tmp/
+
+# Prepare environment
+RUN xvfb-run sh /tmp/wine-init.sh
 
 # Install Python
 ENV PYVER 3.6.3
-COPY SHA256SUMS.txt /tmp
+
 RUN cd && \
   curl -O https://www.python.org/ftp/python/${PYVER}/python-${PYVER}.exe && \
   sha256sum -c /tmp/SHA256SUMS.txt && \
   xvfb-run sh -c "\
-    wine python-${PYVER}.exe /quiet TargetDir=C:\\Python35-32 Include_doc=0 InstallAllUsers=1 && \
+    wine python-${PYVER}.exe /quiet TargetDir=C:\\Python36-32 Include_doc=0 InstallAllUsers=1 && \
     wineserver -w" && \
   rm python-${PYVER}.exe
 
