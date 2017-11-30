@@ -8,7 +8,8 @@
 
 This is a docker container to help building Python applications in Wine. It
 installs Python, PyInstaller and some extensions to be abel to build "native"
-Windows applications.
+Windows applications. It also installs UPX, so PyInstaller can use it to
+compress binaries.
 
 This is currently installed:
 

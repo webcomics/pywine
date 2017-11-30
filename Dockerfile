@@ -23,13 +23,18 @@ RUN xvfb-run sh /tmp/wine-init.sh
 ENV PYVER 3.6.3
 
 RUN cd && \
-  curl -O https://www.python.org/ftp/python/${PYVER}/python-${PYVER}.exe && \
+  curl -LOO \
+    https://www.python.org/ftp/python/${PYVER}/python-${PYVER}.exe \
+    https://github.com/upx/upx/releases/download/v3.94/upx394w.zip \
+  && \
   sha256sum -c /tmp/SHA256SUMS.txt && \
   xvfb-run sh -c "\
     wine python-${PYVER}.exe /quiet TargetDir=C:\\Python36-32 \
       Include_doc=0 InstallAllUsers=1 PrependPath=1 && \
     wineserver -w" && \
-  rm python-${PYVER}.exe
+  unzip upx*.zip && \
+  mv -v upx*/upx.exe ~/.wine/drive_c/windows/ && \
+  rm -Rf upx* python-${PYVER}.exe
 
 # Install some python software
 RUN xvfb-run sh -c "\
