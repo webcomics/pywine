@@ -20,7 +20,7 @@ COPY wine-init.sh SHA256SUMS.txt /tmp/
 RUN xvfb-run sh /tmp/wine-init.sh
 
 # Install Python
-ENV PYVER 3.6.3
+ENV PYVER 3.6.4
 
 RUN cd && \
   curl -LOO \
