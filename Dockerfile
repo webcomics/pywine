@@ -38,7 +38,7 @@ RUN cd && \
 
 # Install some python software
 RUN xvfb-run sh -c "\
-  wine pip install --upgrade pip setuptools && \
+  wine py -m pip install --upgrade pip setuptools && \
   wine pip install pbr pyinstaller && \
   wineserver -w"
 
