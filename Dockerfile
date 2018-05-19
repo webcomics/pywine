@@ -16,6 +16,7 @@ ENV WINEARCH win32
 ENV WINEPREFIX /opt/wineprefix
 
 COPY wine-init.sh SHA256SUMS.txt /tmp/helper/
+COPY mkuserwineprefix /opt/
 
 # Prepare environment
 RUN xvfb-run sh /tmp/helper/wine-init.sh

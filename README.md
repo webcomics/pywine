@@ -13,7 +13,14 @@ compress binaries.
 
 This dockerfile does some umask trickery to create a wineprefix usable by any
 user. This makes is convinient to use from a Jenkins build, since those often
-use a non-root user inside the container.
+use a non-root user inside the container. Unfortunatly, wine doesn't like to
+use a wineprefix not owned by the current user. If you want to use the "global"
+wineprefix from another user, you can source the `/opt/mkuserwineprefix` script
+to create an "usable" wineprefix:
+
+```sh
+  . /opt/mkuserwineprefix
+```
 
 This is currently installed:
 

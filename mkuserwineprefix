@@ -1,0 +1,12 @@
+# workaround for "shared" wine prefixes
+
+if [ ! -O "$WINEPREFIX" ]
+then
+	orgWINEPREFIX="$WINEPREFIX"
+	WINEPREFIX="`mktemp -d --tmpdir wineprefix.XXXXXXXX`"
+	for f in $orgWINEPREFIX/* $orgWINEPREFIX/.u*
+	do
+		ln -s $f $WINEPREFIX/
+	done
+	unset orgWINEPREFIX
+fi
