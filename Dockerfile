@@ -15,31 +15,31 @@ ENV WINEDEBUG -all
 ENV WINEARCH win32
 ENV WINEPREFIX /opt/wineprefix
 
-COPY wine-init.sh SHA256SUMS.txt /tmp/
+COPY wine-init.sh SHA256SUMS.txt /tmp/helper/
 
 # Prepare environment
-RUN xvfb-run sh /tmp/wine-init.sh
+RUN xvfb-run sh /tmp/helper/wine-init.sh
 
 # Install Python
 ENV PYVER 3.6.4
 
-RUN umask 0 && cd && \
+RUN umask 0 && cd /tmp/helper && \
   curl -LOO \
     https://www.python.org/ftp/python/${PYVER}/python-${PYVER}.exe \
     https://github.com/upx/upx/releases/download/v3.94/upx394w.zip \
   && \
-  sha256sum -c /tmp/SHA256SUMS.txt && \
+  sha256sum -c SHA256SUMS.txt && \
   xvfb-run sh -c "\
     wine python-${PYVER}.exe /quiet TargetDir=C:\\Python36-32 \
       Include_doc=0 InstallAllUsers=1 PrependPath=1 && \
     wineserver -w" && \
   unzip upx*.zip && \
   mv -v upx*/upx.exe ${WINEPREFIX}/drive_c/windows/ && \
-  rm -Rf upx* python-${PYVER}.exe
+  cd .. && rm -Rf helper
 
 # Install some python software
 RUN umask 0 && xvfb-run sh -c "\
   wine py -m pip install --upgrade pip setuptools && \
-  wine pip install pbr pyinstaller && \
+  wine pip install --no-warn-script-location pbr pyinstaller && \
   wineserver -w"
 
