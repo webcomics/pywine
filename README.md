@@ -7,9 +7,13 @@
 [![](https://images.microbadger.com/badges/commit/tobix/pywine.svg)](https://microbadger.com/images/tobix/pywine "Get your own commit badge on microbadger.com")
 
 This is a docker container to help building Python applications in Wine. It
-installs Python, PyInstaller and some extensions to be abel to build "native"
+installs Python, PyInstaller and some extensions to be able to build "native"
 Windows applications. It also installs UPX, so PyInstaller can use it to
 compress binaries.
+
+This dockerfile does some umask trickery to create a wineprefix usable by any
+user. This makes is convinient to use from a Jenkins build, since those often
+use a non-root user inside the container.
 
 This is currently installed:
 
