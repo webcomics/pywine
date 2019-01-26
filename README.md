@@ -24,6 +24,6 @@ to create an "usable" wineprefix:
 
 This is currently installed:
 
- * Python 3.6.4
+ * Python 3.7.2
  * pbr
  * PyInstaller

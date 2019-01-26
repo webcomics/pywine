@@ -22,7 +22,7 @@ COPY mkuserwineprefix /opt/
 RUN xvfb-run sh /tmp/helper/wine-init.sh
 
 # Install Python
-ENV PYVER 3.6.4
+ENV PYVER 3.7.2
 
 RUN umask 0 && cd /tmp/helper && \
   curl -LOO \
@@ -31,7 +31,7 @@ RUN umask 0 && cd /tmp/helper && \
   && \
   sha256sum -c SHA256SUMS.txt && \
   xvfb-run sh -c "\
-    wine python-${PYVER}.exe /quiet TargetDir=C:\\Python36-32 \
+    wine python-${PYVER}.exe /quiet TargetDir=C:\\Python37-32 \
       Include_doc=0 InstallAllUsers=1 PrependPath=1 && \
     wineserver -w" && \
   unzip upx*.zip && \
