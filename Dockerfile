@@ -40,7 +40,6 @@ RUN umask 0 && cd /tmp/helper && \
 
 # Install some python software
 RUN umask 0 && xvfb-run sh -c "\
-  wine py -m pip install --upgrade pip setuptools && \
-  wine pip install --no-use-pep517 --no-warn-script-location pbr pyinstaller && \
+  wine pip install --no-warn-script-location pbr pyinstaller && \
   wineserver -w"
 
