@@ -27,7 +27,7 @@ ENV PYVER 3.6.4
 RUN umask 0 && cd /tmp/helper && \
   curl -LOO \
     https://www.python.org/ftp/python/${PYVER}/python-${PYVER}.exe \
-    https://github.com/upx/upx/releases/download/v3.94/upx394w.zip \
+    https://github.com/upx/upx/releases/download/v3.95/upx-3.95-win32.zip \
   && \
   sha256sum -c SHA256SUMS.txt && \
   xvfb-run sh -c "\
