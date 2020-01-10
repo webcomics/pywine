@@ -7,7 +7,7 @@ LABEL \
   org.label-schema.build-date=$BUILD_DATE \
   org.label-schema.license="MIT" \
   org.label-schema.name="Docker Wine & Python 3" \
-  org.label-schema.url="ttps://www.python.org/" \
+  org.label-schema.url="https://www.python.org/" \
   org.label-schema.vcs-ref=$VCS_REF \
   org.label-schema.vcs-url="https://github.com/webcomics/pywine"
 
@@ -22,7 +22,7 @@ COPY mkuserwineprefix /opt/
 RUN xvfb-run sh /tmp/helper/wine-init.sh
 
 # Install Python
-ENV PYVER 3.7.4
+ENV PYVER 3.7.6
 
 RUN umask 0 && cd /tmp/helper && \
   curl -LOO \
@@ -32,7 +32,7 @@ RUN umask 0 && cd /tmp/helper && \
   sha256sum -c SHA256SUMS.txt && \
   xvfb-run sh -c "\
     wine python-${PYVER}.exe /quiet TargetDir=C:\\Python37-32 \
-      Include_doc=0 InstallAllUsers=1 PrependPath=1 && \
+      Include_doc=0 InstallAllUsers=1 PrependPath=1; \
     wineserver -w" && \
   unzip upx*.zip && \
   mv -v upx*/upx.exe ${WINEPREFIX}/drive_c/windows/ && \
@@ -40,6 +40,6 @@ RUN umask 0 && cd /tmp/helper && \
 
 # Install some python software
 RUN umask 0 && xvfb-run sh -c "\
-  wine pip install --no-warn-script-location pbr pyinstaller && \
+  wine pip install --no-warn-script-location pbr pyinstaller; \
   wineserver -w"
 
