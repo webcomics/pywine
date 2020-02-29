@@ -1,10 +1,9 @@
 # Python3-Wine
 
-![license](https://img.shields.io/github/license/webcomics/pywine.svg)
-![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)
-![Docker Automated build](https://img.shields.io/docker/automated/tobix/pywine.svg)
-[![](https://images.microbadger.com/badges/image/tobix/pywine.svg)](https://microbadger.com/images/tobix/pywine "Get your own image badge on microbadger.com")
-[![](https://images.microbadger.com/badges/commit/tobix/pywine.svg)](https://microbadger.com/images/tobix/pywine "Get your own commit badge on microbadger.com")
+![License](https://img.shields.io/github/license/webcomics/pywine)
+![Maintenance](https://img.shields.io/maintenance/yes/2020)
+![Docker Automated build](https://img.shields.io/docker/automated/tobix/pywine)
+![Docker Image Size (tag)](https://img.shields.io/docker/image-size/tobix/pywine/latest)
 
 This is a docker container to help building Python applications in Wine. It
 installs Python, PyInstaller and some extensions to be able to build "native"
