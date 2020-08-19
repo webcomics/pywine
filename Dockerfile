@@ -22,7 +22,7 @@ COPY mkuserwineprefix /opt/
 RUN xvfb-run sh /tmp/helper/wine-init.sh
 
 # Install Python
-ENV PYVER 3.7.6
+ENV PYVER 3.7.9
 
 RUN umask 0 && cd /tmp/helper && \
   curl -LOO \
