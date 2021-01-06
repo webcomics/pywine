@@ -1,7 +1,7 @@
 # Python3 in Wine in Docker
 
 ![License](https://img.shields.io/github/license/webcomics/pywine)
-![Maintenance](https://img.shields.io/maintenance/yes/2020)
+![Maintenance](https://img.shields.io/maintenance/yes/2021)
 ![Docker Automated build](https://img.shields.io/docker/automated/tobix/pywine)
 ![Docker Image Size](https://img.shields.io/docker/image-size/tobix/pywine/latest)
 
