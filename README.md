@@ -15,7 +15,7 @@ default download from python.org. If you need a different version, please use
 one of the tags described [below](#older-python-versions).
 
 This dockerfile does some umask trickery to create a wineprefix usable by any
-user. This makes is convinient to use from a Jenkins build, since those often
+user. This makes it convinient to use from a Jenkins build, since those often
 use a non-root user inside the container. Unfortunatly, wine doesn't like to
 use a wineprefix not owned by the current user. If you want to use the "global"
 wineprefix from another user, you can source the `/opt/mkuserwineprefix` script
