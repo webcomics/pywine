@@ -1,0 +1,11 @@
+name: Build Docker image
+on:
+  - push
+  - pull_request
+jobs:
+  build:
+    name: Build Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Docker image
+        uses: docker/build-push-action@v2
