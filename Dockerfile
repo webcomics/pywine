@@ -1,4 +1,4 @@
-FROM tobix/wine-staging
+FROM tobix/wine:stable
 MAINTAINER Tobias Gruetzmacher "tobias-docker@23.gs"
 
 ARG BUILD_DATE
