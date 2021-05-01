@@ -1,0 +1,9 @@
+#!/bin/sh
+
+latest="3.9"
+
+if [ "$DOCKER_TAG" = latest ]
+then
+  docker tag "$IMAGE_NAME" "$DOCKER_REPO:$latest"
+  docker push "$DOCKER_REPO:$latest"
+fi
