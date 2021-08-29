@@ -1,16 +1,6 @@
 FROM tobix/wine:stable
 MAINTAINER Tobias Gruetzmacher "tobias-docker@23.gs"
 
-ARG BUILD_DATE
-ARG VCS_REF
-LABEL \
-  org.label-schema.build-date=$BUILD_DATE \
-  org.label-schema.license="MIT" \
-  org.label-schema.name="Docker Wine & Python 3" \
-  org.label-schema.url="https://www.python.org/" \
-  org.label-schema.vcs-ref=$VCS_REF \
-  org.label-schema.vcs-url="https://github.com/webcomics/pywine"
-
 ENV WINEDEBUG -all
 ENV WINEARCH win32
 ENV WINEPREFIX /opt/wineprefix
@@ -22,7 +12,7 @@ COPY mkuserwineprefix /opt/
 RUN xvfb-run sh /tmp/helper/wine-init.sh
 
 # Install Python
-ENV PYVER 3.7.9
+ARG PYVER=3.7.9
 
 RUN umask 0 && cd /tmp/helper && \
   curl -LOO \

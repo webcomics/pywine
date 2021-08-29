@@ -1,0 +1,11 @@
+name: Test Docker image
+on:
+  - pull_request
+
+jobs:
+  build:
+    name: Build Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build image
+        uses: docker/build-push-action@v2
