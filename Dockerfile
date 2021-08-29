@@ -1,15 +1,5 @@
-FROM tobix/wine:latest
+FROM tobix/wine:stable
 MAINTAINER Tobias Gruetzmacher "tobias-docker@23.gs"
-
-ARG BUILD_DATE
-ARG VCS_REF
-LABEL \
-  org.label-schema.build-date=$BUILD_DATE \
-  org.label-schema.license="MIT" \
-  org.label-schema.name="Python 3 in Wine in Docker" \
-  org.label-schema.url="https://www.python.org/" \
-  org.label-schema.vcs-ref=$VCS_REF \
-  org.label-schema.vcs-url="https://github.com/webcomics/pywine"
 
 ENV WINEDEBUG -all
 ENV WINEPREFIX /opt/wineprefix
