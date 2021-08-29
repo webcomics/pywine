@@ -11,7 +11,7 @@ COPY mkuserwineprefix /opt/
 RUN xvfb-run sh /tmp/helper/wine-init.sh
 
 # Install Python
-ARG PYVER=3.9.4
+ARG PYVER=3.9.6
 
 RUN umask 0 && cd /tmp/helper && \
   curl -LOO \
