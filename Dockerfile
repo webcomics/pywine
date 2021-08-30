@@ -10,17 +10,19 @@ COPY mkuserwineprefix /opt/
 # Prepare environment
 RUN xvfb-run sh /tmp/helper/wine-init.sh
 
-# Install Python
-ARG PYVER=3.9.6
+# renovate: datasource=github-tags depName=python/cpython
+ARG PYTHON_VERSION=3.9.6
+# renovate: datasource=github-releases depName=upx/upx
+ARG UPX_VERSION=3.96
 
 RUN umask 0 && cd /tmp/helper && \
   curl -LOO \
-    https://www.python.org/ftp/python/${PYVER}/python-${PYVER}-amd64.exe \
-    https://github.com/upx/upx/releases/download/v3.96/upx-3.96-win64.zip \
+    https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-amd64.exe \
+    https://github.com/upx/upx/releases/download/v${UPX_VERSION}/upx-${UPX_VERSION}-win64.zip \
   && \
   sha256sum -c SHA256SUMS.txt && \
   xvfb-run sh -c "\
-    wine python-${PYVER}-amd64.exe /quiet TargetDir=C:\\Python39 \
+    wine python-${PYTHON_VERSION}-amd64.exe /quiet TargetDir=C:\\Python39 \
       Include_doc=0 InstallAllUsers=1 PrependPath=1; \
     wineserver -w" && \
   unzip upx*.zip && \
