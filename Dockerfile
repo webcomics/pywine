@@ -4,7 +4,7 @@ MAINTAINER Tobias Gruetzmacher "tobias-docker@23.gs"
 ENV WINEDEBUG -all
 ENV WINEPREFIX /opt/wineprefix
 
-COPY wine-init.sh SHA256SUMS.txt /tmp/helper/
+COPY wine-init.sh SHA256SUMS.txt keys.gpg /tmp/helper/
 COPY mkuserwineprefix /opt/
 
 # Prepare environment
@@ -16,10 +16,11 @@ ARG PYTHON_VERSION=3.9.6
 ARG UPX_VERSION=3.96
 
 RUN umask 0 && cd /tmp/helper && \
-  curl -LOO \
-    https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-amd64.exe \
+  curl -LOOO \
+    https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-amd64.exe{,.asc} \
     https://github.com/upx/upx/releases/download/v${UPX_VERSION}/upx-${UPX_VERSION}-win64.zip \
   && \
+  gpgv --keyring ./keys.gpg python-${PYTHON_VERSION}-amd64.exe.asc python-${PYTHON_VERSION}-amd64.exe && \
   sha256sum -c SHA256SUMS.txt && \
   xvfb-run sh -c "\
     wine python-${PYTHON_VERSION}-amd64.exe /quiet TargetDir=C:\\Python39 \
