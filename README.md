@@ -1,7 +1,7 @@
 # Python3-Wine
 
 ![License](https://img.shields.io/github/license/webcomics/pywine)
-![Maintenance](https://img.shields.io/maintenance/yes/2021)
+![Maintenance](https://img.shields.io/maintenance/yes/2022)
 ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/tobix/pywine/latest)
 
 This is a docker container to help building Python applications in Wine. It
