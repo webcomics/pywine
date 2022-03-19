@@ -12,16 +12,16 @@ COPY mkuserwineprefix /opt/
 RUN xvfb-run sh /tmp/helper/wine-init.sh
 
 # Install Python
-ARG PYVER=3.8.10
+ARG PYTHON_VERSION=3.8.10
 
 RUN umask 0 && cd /tmp/helper && \
   curl -LOO \
-    https://www.python.org/ftp/python/${PYVER}/python-${PYVER}.exe \
+    https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}.exe \
     https://github.com/upx/upx/releases/download/v3.96/upx-3.96-win32.zip \
   && \
   sha256sum -c SHA256SUMS.txt && \
   xvfb-run sh -c "\
-    wine python-${PYVER}.exe /quiet TargetDir=C:\\Python38-32 \
+    wine python-${PYTHON_VERSION}.exe /quiet TargetDir=C:\\Python38-32 \
       Include_doc=0 InstallAllUsers=1 PrependPath=1; \
     wineserver -w" && \
   unzip upx*.zip && \
