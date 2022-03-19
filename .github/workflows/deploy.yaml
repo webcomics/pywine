@@ -22,7 +22,6 @@ jobs:
         with:
           images: tobix/pywine
           tags: |
-            type=raw,value=latest
             type=raw,value=3.9
 
       - name: Set up Docker Buildx
