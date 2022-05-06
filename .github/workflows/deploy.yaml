@@ -18,7 +18,7 @@ jobs:
 
       - name: Detect image metadata
         id: meta
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@4
         with:
           images: tobix/pywine
           tags: |
