@@ -23,7 +23,7 @@ RUN umask 0 && cd /tmp/helper && \
   gpgv --keyring ./keys.gpg python-${PYTHON_VERSION}-amd64.exe.asc python-${PYTHON_VERSION}-amd64.exe && \
   sha256sum -c SHA256SUMS.txt && \
   xvfb-run sh -c "\
-    wine python-${PYTHON_VERSION}-amd64.exe /quiet TargetDir=C:\\Python39 \
+    wine python-${PYTHON_VERSION}-amd64.exe /quiet TargetDir=C:\\Python310 \
       Include_doc=0 InstallAllUsers=1 PrependPath=1; \
     wineserver -w" && \
   unzip upx*.zip && \
