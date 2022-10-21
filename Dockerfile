@@ -28,8 +28,7 @@ RUN umask 0 && cd /tmp/helper && \
       Include_doc=0 InstallAllUsers=1 PrependPath=1; \
     wineserver -w" && \
   unzip upx*.zip && \
-  mv -v upx*/upx.exe ${WINEPREFIX}/drive_c/windows/ && \
-  cd .. && rm -Rf helper
+  mv -v upx*/upx.exe ${WINEPREFIX}/drive_c/windows/
 
 # Install PyInstaller for Windows
 RUN umask 0 && xvfb-run sh -c "\
@@ -41,13 +40,13 @@ RUN apt update && apt install -y build-essential gdb lcov pkg-config \
       libbz2-dev libffi-dev libgdbm-dev libgdbm-compat-dev liblzma-dev \
       libncurses5-dev libreadline6-dev libsqlite3-dev libssl-dev \
       lzma lzma-dev tk-dev uuid-dev zlib1g-dev
-RUN cd /usr/src && \
+RUN cd /tmp/helper && \
   curl -LOOO \
-    https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz{,.asc} && \
-  gpgv --keyring ./keys.gpg python-${PYTHON_VERSION}.tgz.asc python-${PYTHON_VERSION}.tgz.asc && \
-  sha256sum -c SHA256SUMS.txt
-RUN tar xzf Python-${PYTHON_VERSION}.tgz && cd Python-${PYTHON_VERSION}
-RUN ./configure --enable-optimizations && make && make install
+    https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz{,.asc} && \
+  gpgv --keyring ./keys.gpg Python-${PYTHON_VERSION}.tar.xz.asc Python-${PYTHON_VERSION}.tar.xz && \
+  tar xvf Python-${PYTHON_VERSION}.tar.xz && \
+  cd Python-${PYTHON_VERSION} && \
+  ./configure --enable-optimizations && make && make install
 
 # Install PyInstaller for Linux
 RUN pip3 install pyinstaller
@@ -58,6 +57,6 @@ RUN curl -LOOO \
 RUN tar xvf upx*.tar.xz && \
     mv -v upx*/upx /opt/
 
-# Clean up Linux builds
-RUN cd / && rm -rf /usr/src/*
+# Clean up builds
+RUN rm -Rf /tmp/helper
 
