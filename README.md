@@ -29,6 +29,7 @@ to create an "usable" wineprefix:
 If you need older Python versions for some reason (for example to support
 Windows 7), there are currently tags for the following Python branches:
 
+ * Python 3.11.x: `tobix/pywine:3.11`
  * Python 3.10.x: `tobix/pywine:3.10`
  * Python 3.9.x: `tobix/pywine:3.9`
  * Python 3.8.x: `tobix/pywine:3.8`

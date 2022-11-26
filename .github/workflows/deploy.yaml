@@ -23,7 +23,7 @@ jobs:
           images: tobix/pywine
           tags: |
             type=raw,value=latest
-            type=raw,value=3.10
+            type=raw,value=3.11
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
