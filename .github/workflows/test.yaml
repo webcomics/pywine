@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
