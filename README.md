@@ -26,14 +26,11 @@ to create an "usable" wineprefix:
 
 ## Older Python versions
 
-If you need older Python versions for some reason (for example to support
-Windows 7), there are currently tags for the following Python branches:
+If you need older Python versions for some reason, there are currently tags for
+the following Python branches:
 
  * Python 3.11.x: `tobix/pywine:3.11`
  * Python 3.10.x: `tobix/pywine:3.10`
- * Python 3.9.x: `tobix/pywine:3.9`
- * Python 3.8.x: `tobix/pywine:3.8`
- * Python 3.7.x: `tobix/pywine:3.7`
 
 Older branches might be out-of-date. Please create an
 [issue](https://github.com/webcomics/pywine/issues/new/choose) if you need any
