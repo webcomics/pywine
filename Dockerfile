@@ -11,7 +11,7 @@ COPY mkuserwineprefix /opt/
 RUN xvfb-run sh /tmp/helper/wine-init.sh
 
 # renovate: datasource=github-tags depName=python/cpython versioning=pep440
-ARG PYTHON_VERSION=3.11.3
+ARG PYTHON_VERSION=3.11.4
 # renovate: datasource=github-releases depName=upx/upx versioning=loose
 ARG UPX_VERSION=4.0.2
 
