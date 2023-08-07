@@ -5,7 +5,7 @@ ENV WINEDEBUG -all
 ENV WINEPREFIX /opt/wineprefix
 
 COPY wine-init.sh SHA256SUMS.txt keys.gpg /tmp/helper/
-COPY mkuserwineprefix /opt/
+COPY mkuserwineprefix entrypoint.sh /opt/
 
 # Prepare environment
 RUN xvfb-run sh /tmp/helper/wine-init.sh
@@ -35,3 +35,4 @@ RUN umask 0 && xvfb-run sh -c "\
   wine pip install --no-warn-script-location pyinstaller; \
   wineserver -w"
 
+ENTRYPOINT ["/opt/entrypoint.sh"]
