@@ -1,4 +1,4 @@
-FROM tobix/wine:stable
+FROM tobix/wine:devel
 MAINTAINER Tobias Gruetzmacher "tobias-docker@23.gs"
 
 ENV WINEDEBUG -all
