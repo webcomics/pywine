@@ -26,7 +26,6 @@ RUN umask 0 && cd /tmp/helper && \
     wine python-${PYTHON_VERSION}-amd64.exe /quiet TargetDir=C:\\Python \
       Include_doc=0 InstallAllUsers=1 PrependPath=1; \
     wineserver -w" && \
-  sed -i 's/"CopyFile2"/"CopyFile2_xx_invalid_disabled"/' /opt/wineprefix/drive_c/Python/Lib/shutil.py && \
   unzip upx*.zip && \
   mv -v upx*/upx.exe ${WINEPREFIX}/drive_c/windows/ && \
   cd .. && rm -Rf helper
