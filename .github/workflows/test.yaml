@@ -1,3 +1,4 @@
+---
 name: Test Docker image
 on:
   - pull_request
