@@ -1,3 +1,4 @@
+---
 name: Docker image
 on:
   push:
