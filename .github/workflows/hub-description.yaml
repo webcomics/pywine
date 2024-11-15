@@ -1,12 +1,20 @@
 ---
 name: Update Docker Hub Description
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - README.md
-      - .github/workflows/hub-description.yaml
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - README.md
+  #     - .github/workflows/hub-description.yaml
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: 'Docker repository'
+        required: true
+      username:
+        description: 'Docker Hub username'
+        required: true
 
 permissions:
   contents: read
@@ -21,7 +29,7 @@ jobs:
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v4
         with:
-          username: tobix
+          username: ${{ github.event.inputs.username }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: tobix/pywine
+          repository: ${{ github.event.inputs.repository }}
           short-description: ${{ github.event.repository.description }}
