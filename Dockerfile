@@ -1,8 +1,8 @@
 FROM tobix/wine:devel
-MAINTAINER Tobias Gruetzmacher "tobias-docker@23.gs"
+LABEL org.opencontainers.image.authors="Tobias Gruetzmacher <tobias-docker@23.gs>"
 
-ENV WINEDEBUG -all
-ENV WINEPREFIX /opt/wineprefix
+ENV WINEDEBUG=-all
+ENV WINEPREFIX=/opt/wineprefix
 
 COPY wine-init.sh SHA256SUMS.txt keys.gpg /tmp/helper/
 COPY mkuserwineprefix entrypoint.sh /opt/
