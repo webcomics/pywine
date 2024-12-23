@@ -16,7 +16,7 @@ ARG PYTHON_VERSION=3.13.1
 ARG UPX_VERSION=4.2.4
 
 RUN umask 0 && cd /tmp/helper && \
-  curl -LOOO \
+  curl --fail-with-body -LOOO \
     https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-amd64.exe{,.asc} \
     https://github.com/upx/upx/releases/download/v${UPX_VERSION}/upx-${UPX_VERSION}-win64.zip \
   && \
