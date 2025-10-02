@@ -20,7 +20,7 @@ RUN umask 0 && cd /tmp/helper && \
     https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-amd64.exe{,.asc} \
     https://github.com/upx/upx/releases/download/v${UPX_VERSION}/upx-${UPX_VERSION}-win64.zip \
   && \
-  gpgv --keyring ./keys.gpg python-${PYTHON_VERSION}-amd64.exe.asc python-${PYTHON_VERSION}-amd64.exe && \
+  sqv --keyring ./keys.gpg python-${PYTHON_VERSION}-amd64.exe.asc python-${PYTHON_VERSION}-amd64.exe && \
   sha256sum -c SHA256SUMS.txt && \
   xvfb-run sh -c "\
     wine python-${PYTHON_VERSION}-amd64.exe /quiet TargetDir=C:\\Python \
