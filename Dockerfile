@@ -21,7 +21,7 @@ RUN --mount=from=ghcr.io/sigstore/cosign/cosign:v3.0.2@sha256:b29487e48205d875c3
     "https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-amd64.exe{,.sigstore}" \
     https://github.com/upx/upx/releases/download/v${UPX_VERSION}/upx-${UPX_VERSION}-win64.zip \
   && \
-  cosign verify-blob --certificate-oidc-issuer https://accounts.google.com --certificate-identity-regexp='@python.org$' \
+  cosign verify-blob --certificate-oidc-issuer https://github.com/login/oauth --certificate-identity-regexp='@python.org$' \
     --bundle python-${PYTHON_VERSION}-amd64.exe.sigstore python-${PYTHON_VERSION}-amd64.exe && \
   sha256sum -c SHA256SUMS.txt && \
   xvfb-run sh -c "\
