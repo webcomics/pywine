@@ -4,7 +4,7 @@ LABEL org.opencontainers.image.authors="Tobias Gruetzmacher <tobias-docker@23.gs
 ENV WINEDEBUG=-all
 ENV WINEPREFIX=/opt/wineprefix
 
-COPY wine-init.sh SHA256SUMS.txt keys.gpg /tmp/helper/
+COPY wine-init.sh SHA256SUMS.txt /tmp/helper/
 COPY mkuserwineprefix entrypoint.sh /opt/
 
 # Prepare environment
@@ -15,12 +15,14 @@ ARG PYTHON_VERSION=3.13.9
 # renovate: datasource=github-releases depName=upx/upx versioning=loose
 ARG UPX_VERSION=5.0.2
 
-RUN umask 0 && cd /tmp/helper && \
-  curl --fail-with-body -LOOO \
-    https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-amd64.exe{,.asc} \
+RUN --mount=from=ghcr.io/sigstore/cosign/cosign:v3.0.2@sha256:b29487e48205d875c324c79583e2806d9d269c0fa299e0861bbec023d8430c8b,source=/ko-app/cosign,target=/usr/bin/cosign \
+  umask 0 && cd /tmp/helper && \
+  curl --fail-with-body -LOO \
+    "https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-amd64.exe{,.sigstore}" \
     https://github.com/upx/upx/releases/download/v${UPX_VERSION}/upx-${UPX_VERSION}-win64.zip \
   && \
-  sqv --keyring ./keys.gpg python-${PYTHON_VERSION}-amd64.exe.asc python-${PYTHON_VERSION}-amd64.exe && \
+  cosign verify-blob --certificate-oidc-issuer https://accounts.google.com --certificate-identity-regexp='@python.org$' \
+    --bundle python-${PYTHON_VERSION}-amd64.exe.sigstore python-${PYTHON_VERSION}-amd64.exe && \
   sha256sum -c SHA256SUMS.txt && \
   xvfb-run sh -c "\
     wine python-${PYTHON_VERSION}-amd64.exe /quiet TargetDir=C:\\Python \
