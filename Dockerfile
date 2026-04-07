@@ -15,7 +15,7 @@ ARG PYTHON_VERSION=3.14.3
 # renovate: datasource=github-releases depName=upx/upx versioning=loose
 ARG UPX_VERSION=5.1.0
 
-RUN --mount=from=ghcr.io/sigstore/cosign/cosign:v3.0.5@sha256:be924970ba7438c22e18067dec5637946d6566eac711f5bedd1584e7137008fb,source=/ko-app/cosign,target=/usr/bin/cosign \
+RUN --mount=from=ghcr.io/sigstore/cosign/cosign:v3.0.6@sha256:de9c65609e6bde17e6b48de485ee788407c9502fa08b8f4459f595b21f56cd00,source=/ko-app/cosign,target=/usr/bin/cosign \
   umask 0 && cd /tmp/helper && \
   curl --fail-with-body -LOO \
     "https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-amd64.exe{,.sigstore}" \
