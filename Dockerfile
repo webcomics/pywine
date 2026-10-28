@@ -13,7 +13,7 @@ RUN xvfb-run sh /tmp/helper/wine-init.sh
 # renovate: datasource=github-tags depName=python/cpython versioning=pep440
 ARG PYTHON_VERSION=3.14.10
 # renovate: datasource=github-releases depName=upx/upx versioning=loose
-ARG UPX_VERSION=5.2.1
+ARG UPX_VERSION=5.3.0
 
 RUN --mount=from=ghcr.io/sigstore/cosign/cosign:v3.1.4@sha256:0f06154836d2de34f887a5c273506d52ca43edaa1d9e53e6510fa78a48f69c2d,source=/ko-app/cosign,target=/usr/bin/cosign \
   umask 0 && cd /tmp/helper && \
