@@ -8,7 +8,7 @@ COPY wine-init.sh SHA256SUMS.txt /tmp/helper/
 COPY mkuserwineprefix entrypoint.sh /opt/
 
 # Prepare environment
-RUN xvfb-run sh /tmp/helper/wine-init.sh
+RUN wlwine-run sh /tmp/helper/wine-init.sh
 
 # renovate: datasource=github-tags depName=python/cpython versioning=pep440
 ARG PYTHON_VERSION=3.14.10
@@ -24,17 +24,13 @@ RUN --mount=from=ghcr.io/sigstore/cosign/cosign:v3.1.4@sha256:0f06154836d2de34f8
   cosign verify-blob --certificate-oidc-issuer https://github.com/login/oauth --certificate-identity-regexp='@python.org$' \
     --bundle python-${PYTHON_VERSION}-amd64.exe.sigstore python-${PYTHON_VERSION}-amd64.exe && \
   sha256sum -c SHA256SUMS.txt && \
-  xvfb-run sh -c "\
-    wine python-${PYTHON_VERSION}-amd64.exe /quiet TargetDir=C:\\Python \
-      Include_doc=0 InstallAllUsers=1 PrependPath=1; \
-    wineserver -w" && \
+  wlwine-run wine python-${PYTHON_VERSION}-amd64.exe /quiet TargetDir=C:\\Python \
+    Include_doc=0 InstallAllUsers=1 PrependPath=1 && \
   unzip upx*.zip && \
   mv -v upx*/upx.exe ${WINEPREFIX}/drive_c/windows/ && \
   cd .. && rm -Rf helper
 
 # Install some python software
-RUN umask 0 && xvfb-run sh -c "\
-  wine pip install --no-warn-script-location pyinstaller; \
-  wineserver -w"
+RUN umask 0 && wlwine-run wine pip install --no-warn-script-location pyinstaller
 
 ENTRYPOINT ["/opt/entrypoint.sh"]
