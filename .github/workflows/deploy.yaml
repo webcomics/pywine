@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build and push Docker image
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Login to DockerHub
         uses: docker/login-action@v4
